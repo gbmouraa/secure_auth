@@ -1,9 +1,11 @@
-function App() {
+import RoutesApp from "./routes";
+import GlobalStyle from "./styles/global.style";
+
+export default function App() {
   return (
     <>
-      <span>Olá mundo!</span>
+      <RoutesApp />
+      <GlobalStyle />
     </>
   );
 }
-
-export default App;
