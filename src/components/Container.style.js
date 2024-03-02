@@ -13,12 +13,14 @@ export const Container = styled.main`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 20.2rem;
     background-image: url("./src/assets/wave-top.svg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center bottom;
 
-    @media screen and (min-width: 1800px) {
+    @media screen and (min-width: 570px) {
+      height: 70%;
       transform: translateY(-26%);
     }
   }
@@ -29,10 +31,10 @@ export const Container = styled.main`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40%;
+    height: 30%;
     background-image: url("./src/assets/wave-bottom.svg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: right bottom;
+    background-position: right top;
   }
 `;
