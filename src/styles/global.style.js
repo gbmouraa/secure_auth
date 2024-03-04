@@ -19,4 +19,12 @@ export default createGlobalStyle`
     overflow-x: hidden;
   }
 
+  button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.6rem;
+  }
+
 `;
