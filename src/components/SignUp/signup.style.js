@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SignUpWrapper = styled.div`
   width: 100%;
-  max-width: 63.8rem;
+  max-width: 67.8rem;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -55,9 +55,4 @@ export const LoginButton = styled.button`
   &:hover {
     border-color: ${({ theme }) => theme.blue};
   }
-`;
-
-export const Form = styled.form`
-  width: 100%;
-  margin-top: 4rem;
 `;
