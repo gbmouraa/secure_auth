@@ -8,6 +8,7 @@ import {
 import googleIcon from "../../assets/google.svg";
 import microsoftIcon from "../../assets/microsoft.svg";
 import githubIcon from "../../assets/github.svg";
+import FormSignUp from "../Forms/FormSignUp";
 
 export default function SignUp() {
   return (
@@ -23,14 +24,14 @@ export default function SignUp() {
             <img src={googleIcon} alt="Google icon" />
           </LoginButton>
           <LoginButton>
-            <img src={microsoftIcon} alt="Google icon" />
+            <img src={githubIcon} alt="Google icon" />
           </LoginButton>
           <LoginButton>
-            <img src={githubIcon} alt="Google icon" />
+            <img src={microsoftIcon} alt="Google icon" />
           </LoginButton>
         </SocialLogin>
       </AuthOptions>
-      <div></div>
+      <FormSignUp />
     </SignUpWrapper>
   );
 }
