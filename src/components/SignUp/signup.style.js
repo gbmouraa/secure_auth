@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const SignUpWrapper = styled.div`
+  width: 100%;
+  max-width: 63.8rem;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,8 +40,8 @@ export const SocialLogin = styled.div`
 `;
 
 export const LoginButton = styled.button`
-  width: 6.4rem;
-  height: 6.4rem;
+  width: 5.4rem;
+  height: 5.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,4 +55,9 @@ export const LoginButton = styled.button`
   &:hover {
     border-color: ${({ theme }) => theme.blue};
   }
+`;
+
+export const Form = styled.form`
+  width: 100%;
+  margin-top: 4rem;
 `;
