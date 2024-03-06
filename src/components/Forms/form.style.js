@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Form = styled.form`
   width: 100%;
@@ -21,7 +21,7 @@ export const InputWrapper = styled.div`
   position: relative;
   height: 4.4rem;
   width: 100%;
-  margin-bottom: 2.6rem;
+  margin-bottom: 3.6rem;
 
   label {
     color: ${({ theme }) => theme.secundary_text};
@@ -81,4 +81,29 @@ export const Input = styled.input`
   &:focus + label {
     transform: translateY(-3.2rem);
   }
+
+  ${(props) =>
+    props.errors === "true" &&
+    css`
+      border-color: red;
+
+      &:focus {
+        border-color: red;
+      }
+
+      &:focus + label,
+      &:not(:placeholder-shown) + label {
+        color: red;
+      }
+    `}
+`;
+
+export const ErrorMsg = styled.span`
+  position: absolute;
+  bottom: -2.8rem;
+  font-size: 1.2rem;
+  word-wrap: normal;
+  left: 0.4rem;
+  margin-bottom: 1rem;
+  color: red;
 `;
