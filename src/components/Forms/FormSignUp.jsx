@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, InputWrapper, Input, ErrorMsg } from "./form.style";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import AvatarSelection from "../AvatarSelection";
 
 const schema = z
   .object({
@@ -31,8 +32,18 @@ export default function FormSignUp() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
-  const [password, setPassword] = useState("password");
-  const [confirmPassword, setConfirmPassword] = useState("password");
+  // states para alterar a visibilidade da senha
+  const [passwordVisibility, setPasswordVisivility] = useState({
+    password: "off",
+    confirmPassword: "off",
+  });
+
+  function togglePasswordVisibility(element) {
+    const newPasswordVisibility = { ...passwordVisibility };
+    newPasswordVisibility[element] =
+      newPasswordVisibility[element] === "on" ? "off" : "on";
+    setPasswordVisivility(newPasswordVisibility);
+  }
 
   function onSubmit(data) {
     console.log(data);
@@ -84,7 +95,7 @@ export default function FormSignUp() {
       <InputWrapper>
         <Input
           errors={errors?.password ? "true" : "false"}
-          type={password}
+          type={passwordVisibility.password === "off" ? "password" : "text"}
           id="password"
           placeholder="Senha"
           {...register("password")}
@@ -92,12 +103,11 @@ export default function FormSignUp() {
         <label htmlFor="password">Senha</label>
 
         <button
-          onClick={() =>
-            setPassword((prev) => (prev === "password" ? "text" : "password"))
-          }
+          name="password"
+          onClick={(e) => togglePasswordVisibility(e.currentTarget.name)}
           type="button"
         >
-          {password === "password" ? (
+          {passwordVisibility.password === "on" ? (
             <FiEye size={22} />
           ) : (
             <FiEyeOff size={22} />
@@ -110,7 +120,9 @@ export default function FormSignUp() {
       <InputWrapper>
         <Input
           errors={errors?.confirmPassword ? "true" : "false"}
-          type={confirmPassword}
+          type={
+            passwordVisibility.confirmPassword === "off" ? "password" : "text"
+          }
           id="confirm-password"
           placeholder="Confirmar senha"
           {...register("confirmPassword")}
@@ -118,14 +130,11 @@ export default function FormSignUp() {
         <label htmlFor="confirm-password">Confirmar senha</label>
 
         <button
-          onClick={() =>
-            setConfirmPassword((prev) =>
-              prev === "password" ? "text" : "password"
-            )
-          }
+          name="confirmPassword"
+          onClick={(e) => togglePasswordVisibility(e.currentTarget.name)}
           type="button"
         >
-          {confirmPassword === "password" ? (
+          {passwordVisibility.confirmPassword === "on" ? (
             <FiEye size={22} />
           ) : (
             <FiEyeOff size={22} />
@@ -136,6 +145,7 @@ export default function FormSignUp() {
         )}
       </InputWrapper>
 
+      <AvatarSelection />
       <button type="submit">Cadastrar</button>
     </Form>
   );
