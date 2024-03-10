@@ -107,3 +107,18 @@ export const ErrorMsg = styled.span`
   margin-bottom: 1rem;
   color: red;
 `;
+
+export const SignUpButton = styled.button`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: ${({ theme }) => theme.blue};
+  margin-top: 5.2rem;
+  padding: 1.2rem 2.4rem;
+  border-radius: 0.6rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
