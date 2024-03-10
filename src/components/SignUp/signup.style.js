@@ -7,7 +7,7 @@ export const SignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   text-align: center;
 
   p {

@@ -5,7 +5,6 @@ export const MainWrapper = styled.main`
   max-width: 100rem;
   position: relative;
   z-index: 10;
-  /* height: 1175px; */
   background-color: #fff;
   margin-top: 3rem;
   border-radius: 0.6rem;

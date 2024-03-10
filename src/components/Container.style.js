@@ -6,6 +6,7 @@ export const Container = styled.main`
   min-height: 100vh;
   position: relative;
   margin: auto;
+  padding-bottom: 18rem;
 
   &::before {
     content: "";
