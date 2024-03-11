@@ -1,29 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { schema } from "../../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, InputWrapper, Input, ErrorMsg } from "./form.style";
+import {
+  Form,
+  InputWrapper,
+  Input,
+  ErrorMsg,
+  SignUpButton,
+} from "./form.style";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import AvatarSelection from "../AvatarSelection";
-
-const schema = z
-  .object({
-    firstName: z.string().min(1, "Este campo é obrigatório"),
-    lastName: z.string().min(1, "Este campo é obrigatório"),
-    email: z
-      .string()
-      .min(1, "Este campo é obrigatório")
-      .email("Digite um email válido"),
-    password: z
-      .string()
-      .min(1, "Este campo é obrigatório")
-      .min(6, "Senha deve conter no minimo 6 caracteres"),
-    confirmPassword: z.string().min(1, "Este campo é obrigatório"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas não coincidem",
-    path: ["confirmPassword"],
-  });
 
 export default function FormSignUp() {
   const {
@@ -146,7 +133,7 @@ export default function FormSignUp() {
       </InputWrapper>
 
       <AvatarSelection />
-      <button type="submit">Cadastrar</button>
+      <SignUpButton type="submit">Cadastrar</SignUpButton>
     </Form>
   );
 }
