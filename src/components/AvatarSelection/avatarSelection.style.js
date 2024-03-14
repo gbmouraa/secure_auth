@@ -124,7 +124,6 @@ export const LabelImage = styled.label`
 
   svg {
     transform: rotate(28deg);
-    /* transform: translate(4px, ); */
   }
 `;
 
