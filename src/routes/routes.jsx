@@ -5,6 +5,7 @@ import { Container } from "../components/Container.style";
 import { colors } from "../styles/theme.style";
 import Header from "../components/Header";
 import Home from "../pages/Home";
+import LogIn from "../pages/Login";
 import Private from "./Private";
 import Profile from "../pages/Profile";
 
@@ -17,6 +18,9 @@ export default function RoutesApp() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
+            </Routes>
+            <Routes>
+              <Route path="/login" element={<LogIn />} />
             </Routes>
             <Routes>
               <Route
