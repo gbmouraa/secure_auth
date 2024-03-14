@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../authContext";
 import {
   AvatarSelectionWrapper,
   AvatarsList,
@@ -14,14 +15,13 @@ import { avatars } from "../../data";
 import { TbPencil } from "react-icons/tb";
 
 export default function AvatarSelection() {
-  const [avatarSelected, setAvatarSelected] = useState("");
-  // para efeito visual
+  const { avatarSelected, setAvatarSelected, imageFile, setImageFile } =
+    useContext(AuthContext);
+  // para efeito visual no momento que o usuário seleciona uma foto de sua galeria
   const [profileImage, setProfileImage] = useState(null);
-  // para enviar para o firebase
-  const [imageFile, setImagefile] = useState(null);
 
-  function handleAvatarSelected(avatarID) {
-    setAvatarSelected(avatarID);
+  function handleAvatarSelected(avatarData) {
+    setAvatarSelected(avatarData);
   }
 
   function handleImageFile(e) {
@@ -41,13 +41,13 @@ export default function AvatarSelection() {
     }
 
     setProfileImage(URL.createObjectURL(img));
-    setImagefile(img);
+    setImageFile(img);
     setAvatarSelected("profileImage");
   }
 
+  // seleciona a foto que foi enviada pelo usuário
   function handleProfileImage() {
     if (!!profileImage === false) return;
-
     setAvatarSelected("profileImage");
   }
 
@@ -93,8 +93,8 @@ export default function AvatarSelection() {
               type="radio"
               name="avatar"
               id={item.avatarID}
-              checked={avatarSelected === item.avatarID}
-              onChange={(e) => handleAvatarSelected(e.currentTarget.id)}
+              checked={avatarSelected.avatarID === item.avatarID}
+              onChange={() => handleAvatarSelected(item)}
             />
             <Label htmlFor={item.avatarID}>
               <img src={item.imageLink} alt="avatar" />
