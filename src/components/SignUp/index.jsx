@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../../authContext";
 import {
   SignUpWrapper,
   AuthOptions,
@@ -9,8 +11,11 @@ import googleIcon from "../../assets/google.svg";
 import microsoftIcon from "../../assets/microsoft.svg";
 import githubIcon from "../../assets/github.svg";
 import FormSignUp from "../Forms/FormSignUp";
+import ModalLoading from "../Modals/ModalLoading";
 
 export default function SignUp() {
+  const { loading } = useContext(AuthContext);
+
   return (
     <SignUpWrapper>
       <p>Criar nova conta</p>
@@ -32,6 +37,8 @@ export default function SignUp() {
         </SocialLogin>
       </AuthOptions>
       <FormSignUp />
+
+      {loading && <ModalLoading />}
     </SignUpWrapper>
   );
 }
