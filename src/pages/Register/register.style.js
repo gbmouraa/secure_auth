@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeContainer = styled.div`
+export const RegisterContainer = styled.div`
   width: 100%;
   max-width: 100rem;
   padding: 0 2rem;
