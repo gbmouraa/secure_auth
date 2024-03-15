@@ -3,8 +3,9 @@ import { db, auth, storage } from "./services/firebaseConnection";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
-import { collection, doc, addDoc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext({});
@@ -131,6 +132,19 @@ export function AuthProvider({ children }) {
       });
   }
 
+  async function logOut() {
+    setLoading(true);
+
+    await signOut(auth)
+      .then(() => {
+        setUser(null);
+        localStorage.removeItem("_secureAuth");
+        navigate("/");
+      })
+      .catch((error) => console.log(error + error))
+      .finally(() => setLoading(false));
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -143,6 +157,7 @@ export function AuthProvider({ children }) {
         imageFile,
         setImageFile,
         signIn,
+        logOut,
       }}
     >
       {children}
