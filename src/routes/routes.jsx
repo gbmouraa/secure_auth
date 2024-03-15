@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { Container } from "../components/Container.style";
 import { colors } from "../styles/theme.style";
 import Header from "../components/Header";
-import Home from "../pages/Home";
+import Register from "../pages/Register";
 import LogIn from "../pages/Login";
 import Private from "./Private";
 import Profile from "../pages/Profile";
@@ -17,7 +17,7 @@ export default function RoutesApp() {
           <Container>
             <Header />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Register />} />
             </Routes>
             <Routes>
               <Route path="/login" element={<LogIn />} />
