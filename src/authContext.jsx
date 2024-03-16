@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     function checkUserStorage() {
       const userStorage = localStorage.getItem("_secureAuth");
-      if (userStorage) setUser(JSON.parse(userStorage));
+      if (userStorage && userStorage !== null) setUser(JSON.parse(userStorage));
       setLoading(false);
     }
 
@@ -73,18 +73,24 @@ export function AuthProvider({ children }) {
           avatarURL: avatar,
         };
 
-        setUser(data);
         userStorage(data);
         setAvatarSelected("");
-        navigate("/profile");
+
+        // setTimeout apenas para fins de efeitos visuais -- visualizar o modal :)
+        setTimeout(() => {
+          setLoading(false);
+          setUser(data);
+          navigate("/profile");
+        }, 5000);
       })
       .catch((error) => {
         console.log(error + error.code);
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
   }
 
   async function signIn(email, password) {
+    setLoading(true);
     await signInWithEmailAndPassword(auth, email, password)
       .then(async (snapshot) => {
         const uid = snapshot.user.uid;
@@ -101,15 +107,19 @@ export function AuthProvider({ children }) {
             avatarURL: userData.avatarURL,
           };
 
-          userStorage(user);
-          setUser(data);
-          navigate("/profile");
+          userStorage(data);
+
+          setTimeout(() => {
+            setLoading(false);
+            setUser(data);
+            navigate("/profile");
+          }, 5000);
         });
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error + error.code);
-      })
-      .finally(() => setLoading(false));
+      });
   }
 
   function userStorage(user) {
@@ -139,7 +149,7 @@ export function AuthProvider({ children }) {
       .then(() => {
         setUser(null);
         localStorage.removeItem("_secureAuth");
-        navigate("/");
+        navigate("/login");
       })
       .catch((error) => console.log(error + error))
       .finally(() => setLoading(false));
