@@ -11,8 +11,7 @@ import googleIcon from "../../assets/google.svg";
 import microsoftIcon from "../../assets/microsoft.svg";
 import githubIcon from "../../assets/github.svg";
 import FormSignUp from "../Forms/FormSignUp";
-import ModalLoading from "../Modals/ModalLoading";
-
+import ModalAuth from "../Modals/ModalAuth";
 export default function SignUp() {
   const { loading } = useContext(AuthContext);
 
@@ -38,7 +37,7 @@ export default function SignUp() {
       </AuthOptions>
       <FormSignUp />
 
-      {loading && <ModalLoading />}
+      {loading && <ModalAuth />}
     </SignUpWrapper>
   );
 }
