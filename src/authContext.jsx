@@ -74,13 +74,13 @@ export function AuthProvider({ children }) {
         };
 
         userStorage(data);
-        setAvatarSelected("");
 
         // setTimeout apenas para fins de efeitos visuais -- visualizar o modal :)
         setTimeout(() => {
           setLoading(false);
           setUser(data);
           navigate("/profile");
+          setAvatarSelected("");
         }, 5000);
       })
       .catch((error) => {
