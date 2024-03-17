@@ -37,7 +37,7 @@ export default function SignUp() {
       </AuthOptions>
       <FormSignUp />
 
-      {loading && <ModalAuth />}
+      {loading && <ModalAuth authAction="cadastro" />}
     </SignUpWrapper>
   );
 }
