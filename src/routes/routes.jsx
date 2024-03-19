@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import LogIn from "../pages/Login";
 import Private from "./Private";
 import Profile from "../pages/Profile";
+import Footer from "../components/Footer";
 
 export default function RoutesApp() {
   return (
@@ -32,6 +33,7 @@ export default function RoutesApp() {
                 }
               />
             </Routes>
+            <Footer />
           </Container>
         </ThemeProvider>
       </AuthProvider>
