@@ -8,6 +8,29 @@ export const AvatarSelectionWrapper = styled.div`
     font-weight: 600;
     margin-bottom: 1rem;
   }
+
+  ${(props) =>
+    props.show_in_profile === "true" &&
+    css`
+      position: absolute;
+      bottom: 52%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      z-index: 10;
+      margin: 0;
+      /* From https://css.glass */
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6rem 4rem;
+
+      ${AvatarsList} {
+        margin-top: 0;
+      }
+    `}
 `;
 
 export const AvatarsList = styled.ul`
@@ -145,4 +168,10 @@ export const InputRadio = styled.input`
   &:checked + ${Label} {
     outline: solid 0.4rem #5acf5f;
   }
+`;
+
+export const ButtonArea = styled.div`
+  margin-top: 6rem;
+  display: flex;
+  justify-content: space-between;
 `;
