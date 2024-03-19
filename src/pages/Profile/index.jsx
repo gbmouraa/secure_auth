@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../authContext";
 import {
   ProfileContainer,
@@ -7,9 +7,12 @@ import {
   UserInfo,
   LogoutButton,
 } from "./profile.style";
+import userIcon from "../../assets/user.svg";
+import AvatarSelection from "../../components/AvatarSelection";
 
 export default function Profile() {
   const { logOut, user } = useContext(AuthContext);
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <ProfileContainer>
@@ -17,9 +20,12 @@ export default function Profile() {
         {/* avatar settings */}
         <Avatar>
           <div>
-            <img src={user.avatarURL} alt="Avatar" />
-            <label htmlFor="changeAvatar">Editar</label>
-            <input type="file" id="changeAvatar" />
+            {user.avatarURL === "" ? (
+              <img src={userIcon} alt="Avatar" />
+            ) : (
+              <img src={user.avatarURL} alt="Avatar" />
+            )}
+            <button onClick={() => setIsEditing(true)}>Editar</button>
           </div>
         </Avatar>
         <UserInfo>
@@ -28,6 +34,12 @@ export default function Profile() {
         </UserInfo>
         <LogoutButton onClick={logOut}>Sair</LogoutButton>
       </ProfileWrapper>
+      {isEditing && (
+        <AvatarSelection
+          profileEditing={true}
+          closeModal={() => setIsEditing(false)}
+        />
+      )}
     </ProfileContainer>
   );
 }
