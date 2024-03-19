@@ -9,14 +9,27 @@ import {
   InputImage,
   Label,
   LabelImage,
+  ButtonArea,
 } from "./avatarSelection.style";
 import uploadIcon from "../../assets/icon_camera.svg";
 import { avatars } from "../../data";
 import { TbPencil } from "react-icons/tb";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../services/firebaseConnection";
 
-export default function AvatarSelection() {
-  const { avatarSelected, setAvatarSelected, imageFile, setImageFile } =
-    useContext(AuthContext);
+// prop para saber se o componente está sendo renderizado no cadastro de usuário
+// ou na edição do  perfil
+export default function AvatarSelection({ profileEditing, closeModal }) {
+  const {
+    avatarSelected,
+    setAvatarSelected,
+    imageFile,
+    setImageFile,
+    uploadFile,
+    user,
+    setUser,
+    userStorage,
+  } = useContext(AuthContext);
   // para efeito visual no momento que o usuário seleciona uma foto de sua galeria
   const [profileImage, setProfileImage] = useState(null);
 
@@ -51,12 +64,39 @@ export default function AvatarSelection() {
     setAvatarSelected("profileImage");
   }
 
+  async function handleChange() {
+    const docRef = doc(db, "users", user.userID);
+
+    if (avatarSelected && avatarSelected !== "profileImage") {
+      await updateDoc(docRef, {
+        avatarURL: avatarSelected.imageLink,
+      }).then(() => {
+        let data = {
+          ...user,
+          avatarURL: avatarSelected.imageLink,
+        };
+
+        setUser(data);
+        userStorage(data);
+      });
+
+      return;
+    }
+
+    uploadFile(user.userID, true);
+    setAvatarSelected("");
+  }
+
   return (
-    <AvatarSelectionWrapper>
-      <h3>Escolha seu Avatar</h3>
-      <span>
-        Você também pode adionar uma foto de perfil ou pular esta etapa.
-      </span>
+    <AvatarSelectionWrapper show_in_profile={profileEditing ? "true" : "false"}>
+      {!profileEditing && (
+        <>
+          <h3>Escolha seu Avatar</h3>
+          <span>
+            Você também pode adionar uma foto de perfil ou pular esta etapa.
+          </span>
+        </>
+      )}
 
       <AvatarsList>
         <AvatarSelect>
@@ -102,6 +142,13 @@ export default function AvatarSelection() {
           </AvatarSelect>
         ))}
       </AvatarsList>
+
+      {profileEditing && (
+        <ButtonArea>
+          <button onClick={closeModal}>Cancelar</button>
+          <button onClick={handleChange}>Salvar</button>
+        </ButtonArea>
+      )}
     </AvatarSelectionWrapper>
   );
 }

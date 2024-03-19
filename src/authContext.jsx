@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext({});
@@ -127,14 +127,27 @@ export function AuthProvider({ children }) {
   }
 
   // envia e retorna o link da imagem de usuário no firebase
-  async function uploadFile(userID) {
+  async function uploadFile(userID, update = false) {
     const uploadRef = ref(storage, `image/${userID}/${imageFile.name}`);
 
     // ** refatorar
     return uploadBytes(uploadRef, imageFile)
       .then(async (value) => {
-        return getDownloadURL(value.ref).then((dowloadURL) => {
-          return String(dowloadURL);
+        return getDownloadURL(value.ref).then(async (dowloadURL) => {
+          if (!update) return String(dowloadURL);
+
+          const docRef = doc(db, "users", userID);
+          await updateDoc(docRef, {
+            avatarURL: String(dowloadURL),
+          }).then(() => {
+            let data = {
+              ...user,
+              avatarURL: String(dowloadURL),
+            };
+
+            setUser(data);
+            userStorage(data);
+          });
         });
       })
       .catch((error) => {
@@ -159,6 +172,8 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
+        userStorage,
         loading,
         isSigned: !!user,
         signUp,
@@ -168,6 +183,7 @@ export function AuthProvider({ children }) {
         setImageFile,
         signIn,
         logOut,
+        uploadFile,
       }}
     >
       {children}
