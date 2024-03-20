@@ -6,7 +6,7 @@ export const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  position: relative;
   padding: 0 2rem;
 
   @media screen and (min-width: 1020px) {
@@ -19,7 +19,7 @@ export const ProfileWrapper = styled.div`
   padding: 0 6rem 4rem 6rem;
   z-index: 10;
   background-color: #fff;
-  border-radius: 0.6rem;
+  border-radius: 1.6rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   display: flex;
@@ -42,34 +42,32 @@ export const Avatar = styled.div`
       width: 8rem;
       border-radius: 50%;
       display: block;
+      background-color: #fff;
     }
 
-    input {
-      width: 0px;
-      opacity: 0;
-    }
-
-    label {
+    button {
       position: absolute;
       top: 0;
       left: 0;
       display: block;
       width: 8rem;
       height: 8rem;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: transparent;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: transparent;
       font-size: 1.4rem;
       z-index: -1;
       cursor: pointer;
     }
 
     &:hover {
-      label {
+      button {
         z-index: 1;
+        background-color: rgba(0, 0, 0, 0.3);
+        color: #fff;
       }
     }
   }

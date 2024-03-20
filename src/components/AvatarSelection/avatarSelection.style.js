@@ -25,10 +25,16 @@ export const AvatarSelectionWrapper = styled.div`
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 6rem 4rem;
+      width: 96%;
+      max-width: 48.2rem;
+      padding: 4rem 2rem;
 
       ${AvatarsList} {
         margin-top: 0;
+      }
+
+      @media screen and (min-width: 474px) {
+        padding: 6rem 4rem;
       }
     `}
 `;
@@ -174,4 +180,20 @@ export const ButtonArea = styled.div`
   margin-top: 6rem;
   display: flex;
   justify-content: space-between;
+
+  button {
+    font-weight: 500;
+  }
+
+  .btn-save {
+    background-color: ${({ theme }) => theme.blue};
+    color: #fff;
+    padding: 1.2rem 2.4rem;
+    border-radius: 0.6rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `;

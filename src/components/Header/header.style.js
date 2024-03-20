@@ -27,7 +27,7 @@ export const ActionButton = styled.button`
     width: 0px;
     height: 0.2rem;
     background-color: ${({ theme }) => theme.text};
-    transition: all 0.5s ease;
+    transition: all 0.4s ease;
   }
 
   &:hover {
