@@ -4,6 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -19,6 +22,9 @@ export function AuthProvider({ children }) {
 
   const navigate = useNavigate();
 
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+
   useEffect(() => {
     function checkUserStorage() {
       const userStorage = localStorage.getItem("_secureAuth");
@@ -28,6 +34,43 @@ export function AuthProvider({ children }) {
 
     checkUserStorage();
   }, []);
+
+  async function thirdPartyLogin() {
+    setLoading(true);
+    await signInWithPopup(auth, githubProvider)
+      .then(async (result) => {
+        const user = result.user;
+        const docRef = doc(db, "users", user.uid);
+
+        await setDoc(docRef, {
+          userID: user.uid,
+          firstName: user.displayName,
+          lastName: "",
+          email: user.email,
+          avatarURL: user.photoURL,
+        });
+
+        let data = {
+          userID: user.uid,
+          firstName: user.displayName,
+          lastName: "",
+          email: user.email,
+          avatarURL: user.photoURL,
+        };
+
+        userStorage(data);
+
+        setTimeout(() => {
+          setLoading(false);
+          setUser(data);
+          navigate("/profile");
+        }, 5000);
+      })
+      .catch((error) => {
+        console.log(error + error.code);
+        setLoading(false);
+      });
+  }
 
   async function signUp(userData) {
     setLoading(true);
@@ -184,6 +227,7 @@ export function AuthProvider({ children }) {
         signIn,
         logOut,
         uploadFile,
+        thirdPartyLogin,
       }}
     >
       {children}

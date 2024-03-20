@@ -8,12 +8,11 @@ import {
   LoginButton,
 } from "./signup.style";
 import googleIcon from "../../assets/google.svg";
-import microsoftIcon from "../../assets/microsoft.svg";
 import githubIcon from "../../assets/github.svg";
 import FormSignUp from "../Forms/FormSignUp";
 import ModalAuth from "../Modals/ModalAuth";
 export default function SignUp() {
-  const { loading } = useContext(AuthContext);
+  const { loading, thirdPartyLogin } = useContext(AuthContext);
 
   return (
     <SignUpWrapper>
@@ -24,14 +23,11 @@ export default function SignUp() {
         </p>
         <p>Ou continue com</p>
         <SocialLogin>
-          <LoginButton>
-            <img src={googleIcon} alt="Google icon" />
+          <LoginButton onClick={thirdPartyLogin}>
+            <img src={googleIcon} alt="Google logo" />
           </LoginButton>
-          <LoginButton>
-            <img src={githubIcon} alt="Google icon" />
-          </LoginButton>
-          <LoginButton>
-            <img src={microsoftIcon} alt="Google icon" />
+          <LoginButton onClick={thirdPartyLogin}>
+            <img src={githubIcon} alt="Github logo" />
           </LoginButton>
         </SocialLogin>
       </AuthOptions>
