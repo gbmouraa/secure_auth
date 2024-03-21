@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../../authContext";
+import { UserContext } from "../../userContext";
 import {
   SignUpWrapper,
   AuthOptions,
@@ -7,12 +7,12 @@ import {
   SocialLogin,
   LoginButton,
 } from "./signup.style";
-import googleIcon from "../../assets/google.svg";
-import githubIcon from "../../assets/github.svg";
+import googleIcon from "../../assets/images/google.svg";
+import githubIcon from "../../assets/images/github.svg";
 import FormSignUp from "../Forms/FormSignUp";
 import ModalAuth from "../Modals/ModalAuth";
 export default function SignUp() {
-  const { loading, thirdPartyLogin } = useContext(AuthContext);
+  const { loading, thirdPartyLogin } = useContext(UserContext);
 
   return (
     <SignUpWrapper>

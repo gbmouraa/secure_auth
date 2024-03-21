@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../authContext";
+import { UserContext } from "../../userContext";
 import { HeaderWrapper, ActionButton } from "./header.style";
 import { Logo } from "../Logo.style";
 
 export default function Header() {
-  const { isSigned } = useContext(AuthContext);
+  const { isSigned } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
 

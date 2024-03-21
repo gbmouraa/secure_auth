@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { AuthContext } from "../../authContext";
+import { UserContext } from "../../userContext";
 import {
   AvatarSelectionWrapper,
   AvatarsList,
@@ -11,11 +11,11 @@ import {
   LabelImage,
   ButtonArea,
 } from "./avatarSelection.style";
-import uploadIcon from "../../assets/icon_camera.svg";
-import { avatars } from "../../data";
+import uploadIcon from "../../assets/images/icon_camera.svg";
+import { avatars } from "../../assets/avatarData";
 import { TbPencil } from "react-icons/tb";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../services/firebaseConnection";
+import { db } from "../../firebase/firebaseConnection";
 
 // prop para saber se o componente está sendo renderizado no cadastro de usuário
 // ou na edição do  perfil
@@ -29,7 +29,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
     user,
     setUser,
     userStorage,
-  } = useContext(AuthContext);
+  } = useContext(UserContext);
   // para efeito visual no momento que o usuário seleciona uma foto de sua galeria
   const [profileImage, setProfileImage] = useState(null);
 
@@ -78,6 +78,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
 
         setUser(data);
         userStorage(data);
+        closeModal();
       });
 
       return;
@@ -85,6 +86,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
 
     uploadFile(user.userID, true);
     setAvatarSelected("");
+    closeModal();
   }
 
   return (
@@ -145,8 +147,12 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
 
       {profileEditing && (
         <ButtonArea>
-          <button onClick={closeModal}>Cancelar</button>
-          <button onClick={handleChange}>Salvar</button>
+          <button onClick={closeModal} className="btn-cancel">
+            Cancelar
+          </button>
+          <button onClick={handleChange} className="btn-save">
+            Salvar
+          </button>
         </ButtonArea>
       )}
     </AvatarSelectionWrapper>

@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import { AuthContext } from "../../authContext";
+import { UserContext } from "../../userContext";
 import { useForm } from "react-hook-form";
-import { schema } from "../../schema";
+import { schema } from "../../validations/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -20,7 +20,7 @@ export default function FormSignUp() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
-  const { avatarSelected, signUp } = useContext(AuthContext);
+  const { avatarSelected, signUp } = useContext(UserContext);
 
   // states para alterar a visibilidade da senha
   const [passwordVisibility, setPasswordVisivility] = useState({

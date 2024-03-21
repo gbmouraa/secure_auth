@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../authContext";
+import { UserContext } from "../userContext";
 
 export default function Private({ children }) {
-  const { isSigned, loading } = useContext(AuthContext);
+  const { isSigned, loading } = useContext(UserContext);
 
   if (loading) {
     return <div></div>;

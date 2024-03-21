@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../../authContext";
+import { UserContext } from "../../userContext";
 import {
   ProfileContainer,
   ProfileWrapper,
@@ -7,12 +7,17 @@ import {
   UserInfo,
   LogoutButton,
 } from "./profile.style";
-import userIcon from "../../assets/user.svg";
+import userIcon from "../../assets/images/user.svg";
 import AvatarSelection from "../../components/AvatarSelection";
 
 export default function Profile() {
-  const { logOut, user } = useContext(AuthContext);
+  const { logOut, user, setAvatarSelected } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(false);
+
+  function closeAvatarSelection() {
+    setIsEditing(false);
+    setAvatarSelected("");
+  }
 
   return (
     <ProfileContainer>
@@ -37,7 +42,7 @@ export default function Profile() {
       {isEditing && (
         <AvatarSelection
           profileEditing={true}
-          closeModal={() => setIsEditing(false)}
+          closeModal={closeAvatarSelection}
         />
       )}
     </ProfileContainer>

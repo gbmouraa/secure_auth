@@ -8,7 +8,7 @@ import {
   Msg,
 } from "./modal.style";
 import Loader from "../Loader";
-import checkIcon from "../../assets/check.png";
+import checkIcon from "../../assets/images/check.png";
 
 export default function ModalAuth({ authAction }) {
   const [loading, setLoading] = useState(true);

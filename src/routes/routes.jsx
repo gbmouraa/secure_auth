@@ -1,5 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "../authContext";
+import { UserProvider } from "../userContext";
 import { ThemeProvider } from "styled-components";
 import { Container } from "../components/Container.style";
 import { colors } from "../styles/theme.style";
@@ -13,7 +13,7 @@ import Footer from "../components/Footer";
 export default function RoutesApp() {
   return (
     <BrowserRouter>
-      <AuthProvider>
+      <UserProvider>
         <ThemeProvider theme={colors}>
           <Container>
             <Header />
@@ -36,7 +36,7 @@ export default function RoutesApp() {
             <Footer />
           </Container>
         </ThemeProvider>
-      </AuthProvider>
+      </UserProvider>
     </BrowserRouter>
   );
 }

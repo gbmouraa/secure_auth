@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { db, auth, storage } from "./services/firebaseConnection";
+import { db, auth, storage } from "./firebase/firebaseConnection";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,9 +11,9 @@ import {
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-export const AuthContext = createContext({});
+export const UserContext = createContext({});
 
-export function AuthProvider({ children }) {
+export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [avatarSelected, setAvatarSelected] = useState("");
   // foto de perfil que é enviada ao firebase
@@ -212,7 +212,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider
+    <UserContext.Provider
       value={{
         user,
         setUser,
@@ -231,6 +231,6 @@ export function AuthProvider({ children }) {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </UserContext.Provider>
   );
 }

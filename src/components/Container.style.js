@@ -15,7 +15,7 @@ export const Container = styled.div`
     left: 0;
     width: 100%;
     height: 20.2rem;
-    background-image: url("./src/assets/wave-top.svg");
+    background-image: url("./src/assets/images/wave-top.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -33,7 +33,7 @@ export const Container = styled.div`
     left: 0;
     width: 100%;
     height: 30%;
-    background-image: url("./src/assets/wave-bottom.svg");
+    background-image: url("./src/assets/images/wave-bottom.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right top;

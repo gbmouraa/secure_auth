@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../../authContext";
+import { UserContext } from "../../userContext";
 import { RegisterContainer } from "./register.style";
 import { MainWrapper } from "../../components/MainWrapper.style";
 import SignUp from "../../components/SignUp";
 
 export default function Register() {
-  const { isSigned } = useContext(AuthContext);
+  const { isSigned } = useContext(UserContext);
 
   if (isSigned) {
     return <Navigate to="/profile" />;
