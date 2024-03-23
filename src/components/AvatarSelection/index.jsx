@@ -150,7 +150,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
           <button onClick={closeModal} className="btn-cancel">
             Cancelar
           </button>
-          <button onClick={handleChange} className="btn-save">
+          <button onClick={handleChange} className="btn-default">
             Salvar
           </button>
         </ButtonArea>
