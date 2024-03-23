@@ -14,6 +14,10 @@ import ModalAuth from "../Modals/ModalAuth";
 export default function SignUp() {
   const { loading, thirdPartyLogin } = useContext(UserContext);
 
+  function handleLogin(provider) {
+    thirdPartyLogin(provider);
+  }
+
   return (
     <SignUpWrapper>
       <p>Criar nova conta</p>
@@ -23,10 +27,10 @@ export default function SignUp() {
         </p>
         <p>Ou continue com</p>
         <SocialLogin>
-          <LoginButton onClick={thirdPartyLogin}>
+          <LoginButton onClick={() => handleLogin("google")}>
             <img src={googleIcon} alt="Google logo" />
           </LoginButton>
-          <LoginButton onClick={thirdPartyLogin}>
+          <LoginButton onClick={() => handleLogin("github")}>
             <img src={githubIcon} alt="Github logo" />
           </LoginButton>
         </SocialLogin>
