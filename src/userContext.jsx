@@ -35,9 +35,11 @@ export function UserProvider({ children }) {
     checkUserStorage();
   }, []);
 
-  async function thirdPartyLogin() {
-    setLoading(true);
-    await signInWithPopup(auth, githubProvider)
+  async function thirdPartyLogin(authProvider) {
+    const provider =
+      authProvider === "google" ? googleProvider : githubProvider;
+
+    await signInWithPopup(auth, provider)
       .then(async (result) => {
         const user = result.user;
         const docRef = doc(db, "users", user.uid);
@@ -56,20 +58,14 @@ export function UserProvider({ children }) {
           lastName: "",
           email: user.email,
           avatarURL: user.photoURL,
+          thirdPartyAuth: true,
         };
 
         userStorage(data);
-
-        setTimeout(() => {
-          setLoading(false);
-          setUser(data);
-          navigate("/profile");
-        }, 5000);
+        setUser(data);
+        navigate("/profile");
       })
-      .catch((error) => {
-        console.log(error + error.code);
-        setLoading(false);
-      });
+      .catch((error) => console.log(error + error.code));
   }
 
   async function signUp(userData) {
@@ -170,12 +166,12 @@ export function UserProvider({ children }) {
   }
 
   // envia e retorna o link da imagem de usuário no firebase
-  async function uploadFile(userID, update = false) {
+  function uploadFile(userID, update = false) {
     const uploadRef = ref(storage, `image/${userID}/${imageFile.name}`);
 
     // ** refatorar
     return uploadBytes(uploadRef, imageFile)
-      .then(async (value) => {
+      .then((value) => {
         return getDownloadURL(value.ref).then(async (dowloadURL) => {
           if (!update) return String(dowloadURL);
 
@@ -199,16 +195,13 @@ export function UserProvider({ children }) {
   }
 
   async function logOut() {
-    setLoading(true);
-
     await signOut(auth)
       .then(() => {
         setUser(null);
         localStorage.removeItem("_secureAuth");
         navigate("/login");
       })
-      .catch((error) => console.log(error + error))
-      .finally(() => setLoading(false));
+      .catch((error) => console.log(error + error));
   }
 
   return (
