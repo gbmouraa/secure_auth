@@ -11,11 +11,12 @@ export const ModalWrapper = styled(motion.div)`
   z-index: 99999;
   display: flex;
   justify-items: center;
-  align-items: center;
+  /* align-items: center; */
   padding: 0 1.2rem;
 `;
 export const Modal = styled(motion.div)`
   width: 100%;
+  height: fit-content;
   max-width: 60rem;
   background-color: #fff;
   border-radius: 0.6rem;

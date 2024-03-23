@@ -177,6 +177,7 @@ export const InputRadio = styled.input`
 `;
 
 export const ButtonArea = styled.div`
+  width: 100%;
   margin-top: 6rem;
   display: flex;
   justify-content: space-between;
@@ -185,7 +186,7 @@ export const ButtonArea = styled.div`
     font-weight: 500;
   }
 
-  .btn-save {
+  .btn-default {
     background-color: ${({ theme }) => theme.blue};
     color: #fff;
     padding: 1.2rem 2.4rem;
