@@ -7,9 +7,7 @@ export const FooterWrapper = styled.footer`
   bottom: 60px;
   z-index: 10;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  row-gap: 1rem;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   max-width: 100rem;
