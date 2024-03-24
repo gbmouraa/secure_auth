@@ -26,11 +26,22 @@ export const ProfileWrapper = styled.div`
   flex-direction: column;
 `;
 
+export const ThirdPartyAuthIcon = styled.div``;
+
 export const Avatar = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   transform: translateY(-50%);
+
+  ${ThirdPartyAuthIcon} {
+    transform: translate(80%, 50px);
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
 
   div {
     width: 8rem;
@@ -40,6 +51,8 @@ export const Avatar = styled.div`
 
     img {
       width: 8rem;
+      height: 8rem;
+      object-fit: cover;
       border-radius: 50%;
       display: block;
       background-color: #fff;

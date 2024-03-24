@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Loader from "../Loader";
 
 export const AvatarSelectionWrapper = styled.div`
   margin-top: 5.2rem;
@@ -31,6 +32,19 @@ export const AvatarSelectionWrapper = styled.div`
 
       ${AvatarsList} {
         margin-top: 0;
+      }
+
+      .loader-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        z-index: -2;
       }
 
       @media screen and (min-width: 474px) {

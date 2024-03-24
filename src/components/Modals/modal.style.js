@@ -11,7 +11,6 @@ export const ModalWrapper = styled(motion.div)`
   z-index: 99999;
   display: flex;
   justify-items: center;
-  /* align-items: center; */
   padding: 0 1.2rem;
 `;
 export const Modal = styled(motion.div)`
@@ -19,7 +18,7 @@ export const Modal = styled(motion.div)`
   height: fit-content;
   max-width: 60rem;
   background-color: #fff;
-  border-radius: 0.6rem;
+  border-radius: 1.6rem;
   padding: 6rem 4rem;
   margin: auto;
   display: flex;
@@ -54,5 +53,6 @@ export const RegisterSuccess = styled(motion.div)`
 export const Msg = styled(motion.p)`
   .upper {
     text-transform: capitalize;
+    color: ${({ theme }) => theme.text};
   }
 `;

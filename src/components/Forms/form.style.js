@@ -122,3 +122,11 @@ export const SignUpButton = styled.button`
     opacity: 0.8;
   }
 `;
+
+export const AuthErrorMsg = styled.span`
+  font-size: 1.4rem;
+  margin-right: 100%;
+  display: block;
+  width: 170px;
+  transform: translateY(-20px);
+`;
