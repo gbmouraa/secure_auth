@@ -16,6 +16,7 @@ export const UserContext = createContext({});
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [avatarSelected, setAvatarSelected] = useState("");
+  const [authError, setAuthError] = useState("");
   // foto de perfil que é enviada ao firebase
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ export function UserProvider({ children }) {
           lastName: "",
           email: user.email,
           avatarURL: user.photoURL,
-          thirdPartyAuth: true,
+          thirdPartyAuth: authProvider,
         };
 
         userStorage(data);
@@ -70,6 +71,7 @@ export function UserProvider({ children }) {
 
   async function signUp(userData) {
     setLoading(true);
+    setAuthError("");
 
     // flag para definir se será necessário fazer o upload de uma imagem para o firebase
     let sendImage = false;
@@ -123,6 +125,8 @@ export function UserProvider({ children }) {
         }, 5000);
       })
       .catch((error) => {
+        if (error.code === "auth/email-already-in-use")
+          setAuthError("email-already-in-use");
         console.log(error + error.code);
         setLoading(false);
       });
@@ -130,6 +134,7 @@ export function UserProvider({ children }) {
 
   async function signIn(email, password) {
     setLoading(true);
+    setAuthError("");
     await signInWithEmailAndPassword(auth, email, password)
       .then(async (snapshot) => {
         const uid = snapshot.user.uid;
@@ -157,6 +162,7 @@ export function UserProvider({ children }) {
       })
       .catch((error) => {
         setLoading(false);
+        setAuthError("invalid-credential");
         console.log(error + error.code);
       });
   }
@@ -166,12 +172,11 @@ export function UserProvider({ children }) {
   }
 
   // envia e retorna o link da imagem de usuário no firebase
-  function uploadFile(userID, update = false) {
+  async function uploadFile(userID, update = false) {
     const uploadRef = ref(storage, `image/${userID}/${imageFile.name}`);
 
-    // ** refatorar
-    return uploadBytes(uploadRef, imageFile)
-      .then((value) => {
+    const upload = await uploadBytes(uploadRef, imageFile)
+      .then(async (value) => {
         return getDownloadURL(value.ref).then(async (dowloadURL) => {
           if (!update) return String(dowloadURL);
 
@@ -192,6 +197,8 @@ export function UserProvider({ children }) {
       .catch((error) => {
         console.log(error + error.code);
       });
+
+    return upload;
   }
 
   async function logOut() {
@@ -221,6 +228,7 @@ export function UserProvider({ children }) {
         logOut,
         uploadFile,
         thirdPartyLogin,
+        authError,
       }}
     >
       {children}

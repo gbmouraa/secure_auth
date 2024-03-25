@@ -1,9 +1,7 @@
 import { FooterWrapper, Social } from "./footer.style";
-import { Logo } from "../Logo.style";
 export default function Footer() {
   return (
     <FooterWrapper>
-      <Logo>SecureAuth</Logo>
       <Social>
         <li>
           <a

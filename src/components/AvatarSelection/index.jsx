@@ -16,6 +16,7 @@ import { avatars } from "../../assets/avatarData";
 import { TbPencil } from "react-icons/tb";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConnection";
+import Loader from "../Loader";
 
 // prop para saber se o componente está sendo renderizado no cadastro de usuário
 // ou na edição do  perfil
@@ -32,6 +33,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
   } = useContext(UserContext);
   // para efeito visual no momento que o usuário seleciona uma foto de sua galeria
   const [profileImage, setProfileImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   function handleAvatarSelected(avatarData) {
     setAvatarSelected(avatarData);
@@ -65,6 +67,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
   }
 
   async function handleChange() {
+    setLoading(true);
     const docRef = doc(db, "users", user.userID);
 
     if (avatarSelected && avatarSelected !== "profileImage") {
@@ -79,14 +82,16 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
         setUser(data);
         userStorage(data);
         closeModal();
+        setLoading(false);
       });
 
       return;
     }
 
-    uploadFile(user.userID, true);
+    await uploadFile(user.userID, true);
     setAvatarSelected("");
     closeModal();
+    setLoading(false);
   }
 
   return (
@@ -100,7 +105,7 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
         </>
       )}
 
-      <AvatarsList>
+      <AvatarsList style={loading ? { opacity: "0" } : {}}>
         <AvatarSelect>
           <UploadImageButton
             type="button"
@@ -146,14 +151,22 @@ export default function AvatarSelection({ profileEditing, closeModal }) {
       </AvatarsList>
 
       {profileEditing && (
-        <ButtonArea>
-          <button onClick={closeModal} className="btn-cancel">
-            Cancelar
-          </button>
-          <button onClick={handleChange} className="btn-default">
-            Salvar
-          </button>
-        </ButtonArea>
+        <>
+          <ButtonArea style={loading ? { opacity: "0" } : {}}>
+            <button onClick={closeModal} className="btn-cancel">
+              Cancelar
+            </button>
+            <button onClick={handleChange} className="btn-default">
+              Salvar
+            </button>
+          </ButtonArea>
+          <div
+            className="loader-wrapper"
+            style={loading ? { opacity: "1", zIndex: "1" } : {}}
+          >
+            <Loader />
+          </div>
+        </>
       )}
     </AvatarSelectionWrapper>
   );

@@ -20,7 +20,7 @@ export default function FormSignUp() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
-  const { avatarSelected, signUp } = useContext(UserContext);
+  const { avatarSelected, signUp, authError } = useContext(UserContext);
 
   // states para alterar a visibilidade da senha
   const [passwordVisibility, setPasswordVisivility] = useState({
@@ -82,6 +82,9 @@ export default function FormSignUp() {
         <label htmlFor="email">Email</label>
 
         {errors?.email && <ErrorMsg>{errors.email.message}</ErrorMsg>}
+        {authError === "email-already-in-use" && (
+          <ErrorMsg>Email já cadastrado.</ErrorMsg>
+        )}
       </InputWrapper>
 
       <InputWrapper>

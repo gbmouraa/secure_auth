@@ -30,7 +30,9 @@ export default function ModalAuth({ authAction }) {
       <Modal>
         <Loading opacity={loading ? "1" : "0"}>
           <Loader />
-          <p>Aguarde enquanto efetuamos seu {authAction}.</p>
+          <p style={{ fontSize: "16px" }}>
+            Aguarde enquanto efetuamos seu {authAction}.
+          </p>
         </Loading>
         {!loading && (
           <RegisterSuccess>
@@ -53,6 +55,7 @@ export default function ModalAuth({ authAction }) {
                 delay: 0.5,
                 ease: [0, 0.71, 0.2, 1.01],
               }}
+              style={{ fontSize: "16px" }}
             >
               <span className="upper">{authAction}</span> efetuado com sucesso!
               &#x1F389;

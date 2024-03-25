@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../userContext";
-import { HeaderWrapper, ActionButton } from "./header.style";
-import { Logo } from "../Logo.style";
+import { HeaderWrapper, ActionButton, Logo } from "./header.style";
 
 export default function Header() {
   const { isSigned } = useContext(UserContext);
