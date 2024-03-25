@@ -27,4 +27,32 @@ export default createGlobalStyle`
     font-size: 1.6rem;
   }
 
+  .loader{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1.6rem;
+
+
+    .loader-box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 50rem;
+      border-radius: 1.6rem;
+      padding: 8rem 0;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+     -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  }
+
 `;
