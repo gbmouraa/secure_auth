@@ -6,10 +6,13 @@ import {
   Avatar,
   UserInfo,
   LogoutButton,
+  ThirdPartyAuthIcon,
 } from "./profile.style";
 import userIcon from "../../assets/images/user.svg";
 import AvatarSelection from "../../components/AvatarSelection";
 import ModalLogout from "../../components/Modals/ModalLogout";
+import iconGoogle from "../../assets/images/google.svg";
+import iconGithub from "../../assets/images/github.svg";
 
 export default function Profile() {
   const { user, setAvatarSelected } = useContext(UserContext);
@@ -36,6 +39,14 @@ export default function Profile() {
               <button onClick={() => setIsEditing(true)}>Editar</button>
             )}
           </div>
+          {user?.thirdPartyAuth && (
+            <ThirdPartyAuthIcon>
+              <img
+                src={user.thirdPartyAuth === "google" ? iconGoogle : iconGithub}
+                alt="icon"
+              />
+            </ThirdPartyAuthIcon>
+          )}
         </Avatar>
         <UserInfo>
           <span>{`${user.firstName} ${user.lastName}`}</span>
