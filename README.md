@@ -21,5 +21,5 @@ Este é um projeto full stack de autenticação de usuários, permite que os usu
 
 ### :raising_hand: Autor
 
-**Website** - [Gabriel M.](https://gmouradev.netlify.app/)
-**Linkedin** - [Gabriel Moura](https://www.linkedin.com/in/gabriel-moura-b63382161/)
+- **Website (portfólio):**  [Gabriel M.](https://gmouradev.netlify.app/)
+- **Linkedin:**  [Gabriel Moura](https://www.linkedin.com/in/gabriel-moura-b63382161/)
