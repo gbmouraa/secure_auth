@@ -1,6 +1,6 @@
 # :lock: SecureAuth - Sistema de autenticação
 
-Este é um projeto full stack de autenticação de usuários, permite que os usuários suários se autentiquem via e-mail e senha, bem como através de contas do Google e do GitHub. O projeto foi desenvolvido para fins de estudo :)
+Este é um projeto full stack de autenticação de usuários, permite que os usuários se autentiquem via e-mail e senha, bem como através de contas do Google e do GitHub. O projeto foi desenvolvido para fins de estudo :)
 
 ## :computer: Funcionalidades principais
 
