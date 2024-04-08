@@ -11,7 +11,10 @@ Este é um projeto full stack de autenticação de usuários, permite que os usu
 
 ## :hammer: Tecnologias utilizadas
 
-- **Firebase:** como o back-end do projeto
+- **HTML**
+- **Javascript**
+- **React**
+- **Firebase:** como o back-end do projeto 
 - **React hook form + zod:** para fazer a validação dos formulários
 - **Styled-components + Framer Motion:** para o estilo e animações
 
